@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator by JSX & React</title>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@17.0.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
+    <script type="text/babel">
+        const App = () => {
+            // destructuring array from React.useState and set first state for local storage
+            const [number1, setNumber1] = React.useState(parseInt(localStorage.getItem("inputNumber1") ?? "0"));
+            const [number2, setNumber2] = React.useState(parseInt(localStorage.getItem("inputNumber2") ?? "0"));
+
+            // set side effect, will be running every any inputed on number1 and number2
+            React.useEffect(() => {
+                localStorage.setItem("inputNumber1", number1)
+                localStorage.setItem("inputNumber2", number2)
+            })
+
+            // check the inputed number1 value then set state
+            const numb1Inputted = (event) => {
+                const numberValue = parseInt(event.target.value)
+                if (!isNaN(numberValue)) {
+                    setNumber1(numberValue)
+                } else {
+                    setNumber1(0)
+                }
+            }
+
+            // check the inputed number1 value then set state
+            const numb2Inputted = (event) => {
+                const numberValue = parseInt(event.target.value)
+                if (!isNaN(numberValue)) {
+                    setNumber2(numberValue)
+                } else {
+                    setNumber2(0)
+                }
+            }
+
+            // function button plus
+            const btnPlus = () => {
+                result = number1 + number2;
+                document.getElementById("result").innerHTML = result;
+            }
+
+
+            // function button minus
+            const btnMinus = () => {
+                result = number1 - number2;
+                document.getElementById("result").innerHTML = result;
+            }
+
+            // function button multiple
+            const btnMultiple = () => {
+                result = number1 * number2;
+                document.getElementById("result").innerHTML = result;
+            }
+
+            // function button divide
+            const btnDivide = () => {
+                result = number1 / number2;
+                document.getElementById("result").innerHTML = result;
+            }
+
+            // set components
+            return (
+                <div>
+                    <input type="text" name="numb1" onInput={numb1Inputted} value={number1} />
+                    <input type="text" name="numb2" onInput={numb2Inputted} value={number2} />
+                    <button onClick={btnPlus}>+</button>
+                    <button onClick={btnMinus}>-</button>
+                    <button onClick={btnMultiple}>x</button>
+                    <button onClick={btnDivide}>/</button>
+                    <p id="result"></p>
+                </div>
+            )
+        }
+
+        // render DOM
+        const rootElement = document.getElementById("root")
+        ReactDOM.render(<App />, rootElement)
+    </script>
+</body>
+
+</html>
