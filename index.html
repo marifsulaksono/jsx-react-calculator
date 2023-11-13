@@ -50,7 +50,6 @@
                 document.getElementById("result").innerHTML = result;
             }
 
-
             // function button minus
             const btnMinus = () => {
                 result = number1 - number2;
@@ -69,6 +68,12 @@
                 document.getElementById("result").innerHTML = result;
             }
 
+            const btnClear = () => {
+                setNumber1(0)
+                setNumber2(0)
+                document.getElementById("result").innerHTML = "";
+            }
+
             // set components
             return (
                 <div>
@@ -78,6 +83,7 @@
                     <button onClick={btnMinus}>-</button>
                     <button onClick={btnMultiple}>x</button>
                     <button onClick={btnDivide}>/</button>
+                    <button onClick={btnClear}>Clear</button>
                     <p id="result"></p>
                 </div>
             )
